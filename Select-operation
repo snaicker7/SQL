@@ -1,0 +1,30 @@
+use jedi_academy;
+select * from students;
+insert  into students(first_name,last_name,email) values('shaktiman', 'gangadhar', 'shaktiman.in');
+-- here if we remove the columns, in that case, we need to explicitly mention id even though its has incremental value
+
+select 1;
+-- smallest select query
+
+select * from students where address='Jhansi';
+select * from students where address!='Jhansi';
+select * from students where address <> 'Jhansi';
+
+-- Aliases
+-- change the column name
+
+select first_name as first , last_name as last from students;
+select * from students where address <> 'Jhansi' and address <> 'London';
+select first_name as first, last_name as last from students where first_name = 'Mycroft' or first_name = 'Jane';
+
+select * from students where iq > 100 and  iq<150;
+select * from students where iq between 100 and 150;
+-- between includes 100 and 150
+
+-- pattern matching
+select * from students where address like '%don';
+select * from students where first_name like 'M_croft';
+
+-- match things against list
+ select * from students where address not in ('London', 'Jhansi')
+
