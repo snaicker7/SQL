@@ -31,10 +31,8 @@ select * from students where first_name like 'M_croft';
 select * from instructors;
 select * from instructors where email like '%jedi.com';
 select * from instructors where email like '_@%';
-
 -- MySQL -isms-> 
 -- To find a phone number which is empty
-
 insert into instructors(first_name, last_name, email)values ('Surya', 'Naicker', 'surya@gmail,com');
 select * from instructors where phone= Null; -- this doesnt give any reponse  - mysql isms 
 select * from instructors where phone <> Null; -- same as above
@@ -44,10 +42,8 @@ select * from instructors where phone IS not Null;
 
 -- is check the presence
 -- phone number = null -> does comparison
-
 select * from students where iq>=170 and batch_id is null;
 select * from students limit 2;
-
 -- top 5 students sorted by iqs
 select * from students order by iq desc limit 5;
 
@@ -63,3 +59,28 @@ select * from students order by id desc limit 5 offset 2 ;
 
 -- get all the students who have a batch and sort by iq and name
 select * from students where batch_id is not null order by iq desc, first_name asc;
+
+-- get instructor name for each batches
+select * from batches inner join instructors on batches.instructor_id = instructors.id;
+select * from batches b inner join instructors i on b.instructor_id = i.id;
+
+-- table name aliases can be directly used after table
+select b.id, b.name, i.first_name from batches b inner join instructors i on b.instructor_id = i.id;
+
+-- get all the students with their batch names and start dates
+select * from students;
+select s.id, s.first_name, s.last_name , b.name, b.start_date from students s inner join batches b on s.batch_id=b.id; 
+
+-- get all the students with the name of their instructor
+select s.id, s.first_name, s.last_name ,b.id ,b.name, i.first_name from students s inner join batches b join instructors i on b.instructor_id= i.id on s.batch_id=b.id; 
+
+
+-- get all the batches with their instructor names;
+-- inner joins
+select * from batches b inner join instructors i on b.instructor_id = i.id;
+
+-- left outer joins
+select * from batches b left outer join instructors i on b.instructor_id = i.id;
+
+-- right outer joins
+select * from batches b right outer join instructors i on b.instructor_id = i.id;
