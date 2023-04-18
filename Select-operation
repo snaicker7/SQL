@@ -28,3 +28,38 @@ select * from students where first_name like 'M_croft';
 -- match things against list
  select * from students where address not in ('London', 'Jhansi')
 
+select * from instructors;
+select * from instructors where email like '%jedi.com';
+select * from instructors where email like '_@%';
+
+-- MySQL -isms-> 
+-- To find a phone number which is empty
+
+insert into instructors(first_name, last_name, email)values ('Surya', 'Naicker', 'surya@gmail,com');
+select * from instructors where phone= Null; -- this doesnt give any reponse  - mysql isms 
+select * from instructors where phone <> Null; -- same as above
+select * from instructors where phone IS Null; -- this give proper result when we use null
+select * from instructors where phone IS not Null; 
+-- in mysql always use IS comparing with null
+
+-- is check the presence
+-- phone number = null -> does comparison
+
+select * from students where iq>=170 and batch_id is null;
+select * from students limit 2;
+
+-- top 5 students sorted by iqs
+select * from students order by iq desc limit 5;
+
+-- get the bottom 5 students by iqs
+select * from students order by iq desc limit 5;
+
+-- get the bottom 5 students by iq
+select * from students ;
+
+-- offset skips the no of records
+select * from students order by id desc limit 5 offset 2 ;
+
+
+-- get all the students who have a batch and sort by iq and name
+select * from students where batch_id is not null order by iq desc, first_name asc;
