@@ -32,3 +32,41 @@ select * from students where batch_id is null;
 select substring('Namma Bengaluru', -3, 4);
 select left('Namma Bengaluru', 4);
 select right('Namma Bengaluru', 5);
+
+-- aggregation
+select min(iq) from students;
+
+select max(id) from batches;
+
+select max(start_date) from batches;
+
+
+-- get the sum of absolute values of IQ
+
+select sum(abs(iq)) from students;
+
+select count(distinct(batch_id)) from students;
+
+-- get the count of all the students whose last name ends with walker
+select * , count(last_name) from students where last_name like '%walker';
+
+-- get the average IQ of student without using AVG
+-- aggregate function doesnt consider null
+select (sum(iq))/count(iq) from students ;
+select * from students;
+select avg(length(name)) from batches;
+
+-- get average for each batch id:-
+
+select b.name, avg(s.iq)  from students s join batches b on s.batch_id=b.id group by s.batch_id;
+
+
+-- get the maximum length of the first name of a student for each batch
+
+-- group by column + aggregate value
+-- we should always group by the column and then add any condition
+select batch_id, max(length(first_name)) from students group by batch_id;
+
+-- find the total number of students in each batch
+select * from batches;
+select b.name, count(s.id) from students s right join batches b on s.batch_id=b.id group by b.id ;
